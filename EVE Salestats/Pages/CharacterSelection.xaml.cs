@@ -29,9 +29,6 @@ namespace EVE_Salestats
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Brush color_text = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 255));
-            Brush color_background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 32, 54));
-
             Character[] characters = e.Parameter as Character[];
 
             Grid charGrid = new Grid();
@@ -50,17 +47,17 @@ namespace EVE_Salestats
                 charGrid.ColumnDefinitions.Add(columnDefinition);
                 
                 // border arround
-                Border characterBox = new Border();
-                characterBox.BorderBrush = color_text;
-                characterBox.BorderThickness = new Thickness(0.5);
-                characterBox.Background = color_background;
+                Button characterBox = new Button();
                 characterBox.Width = 160;
                 characterBox.Height = 260;
                 characterBox.Margin = new Thickness(10);
+                characterBox.BorderThickness = new Thickness(0.5);
                 characterBox.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
                 characterBox.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
                 Grid.SetColumn(characterBox, columnIndex);
                 Grid.SetRow(characterBox, 0);
+
+                
 
                 // image
                 Image image = new Image();
@@ -123,7 +120,7 @@ namespace EVE_Salestats
                 characterData.RowDefinitions.Add(row_space);
 
                 charGrid.Children.Add(characterBox);
-                characterBox.Child = characterData;
+                characterBox.Content = characterData;
                 characterData.Children.Add(image);
                 characterData.Children.Add(name);
                 characterData.Children.Add(corp);
