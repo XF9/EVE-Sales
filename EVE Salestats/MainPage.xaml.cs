@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Http;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -83,13 +84,16 @@ namespace EVE_Salestats
         /// <summary>
         /// Load character data
         /// </summary>
-        private void LoadCharacters()
+        async private void LoadCharacters()
         {
             String request = "https://api.eveonline.com/account/Characters.xml.aspx?keyID=" + this.apiKey + "&vCode=" + this.vCode;
 
             try
             {
-                XDocument characterdata = XDocument.Load(request);
+                HttpResponseMessage response = await new HttpClient().GetAsync(request);
+                string xml_data = await response.Content.ReadAsStringAsync();
+
+                XDocument characterdata = XDocument.Parse(xml_data);
 
                 var characters = from character in characterdata.Descendants("row")
                                select new
