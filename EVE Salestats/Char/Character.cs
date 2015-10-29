@@ -44,7 +44,7 @@ namespace EVE_Salestats.Char
         }
 
 
-        public Character(String name, String charID, String Corp, float balance)
+        public Character(String name, String charID, String corp, float balance)
         {
             this.Name = name;
             this.CharID = charID;
