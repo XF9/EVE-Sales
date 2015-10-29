@@ -17,13 +17,13 @@
 
         <TextBlock  Text="Select Character"
                     Grid.Row="1"
-                    Grid.ColumnSpan="2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Margin="20,0"
+                    Margin="0,10,0,10"
                     FontSize="25"
                     FontWeight="Bold"
-                    Foreground="#09F"/>
+                    Foreground="#09F" Width="192"/>
+
         <!--
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
