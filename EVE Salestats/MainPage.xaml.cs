@@ -34,6 +34,7 @@ namespace EVE_Salestats
     public sealed partial class MainPage : Page
     {
         Windows.Storage.ApplicationDataContainer localSettings;
+        private String apiBaseUrl = "https://api.eveonline.com/";
         private String apiKey, vCode = "";
 
         public MainPage()
@@ -86,7 +87,7 @@ namespace EVE_Salestats
         /// </summary>
         async private void LoadCharacters()
         {
-            String request = "https://api.eveonline.com/account/Characters.xml.aspx?keyID=" + this.apiKey + "&vCode=" + this.vCode;
+            String request = this.apiBaseUrl + "account/Characters.xml.aspx?keyID=" + this.apiKey + "&vCode=" + this.vCode;
 
             try
             {
@@ -99,7 +100,8 @@ namespace EVE_Salestats
                                select new
                                {
                                    Name = character.Attribute("name").Value,
-                                   CharID = character.Attribute("characterID").Value
+                                   CharID = character.Attribute("characterID").Value,
+                                   Corp = character.Attribute("corporationName").Value
                                };
 
                 Character[] charlist = new Character[characters.Count()];
@@ -107,7 +109,8 @@ namespace EVE_Salestats
 
                 foreach (var character in characters)
                 {
-                    Character charcter = new Character(character.Name, character.CharID, "Nope", 1000.0f);
+                    float charcter_balane = await FetchWalletData(character.CharID);
+                    Character charcter = new Character(character.Name, character.CharID, character.Corp, charcter_balane);
                     charlist[index++] = charcter;
                 }
 
@@ -118,6 +121,27 @@ namespace EVE_Salestats
                 this.Errormsg.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 this.LoginButton.Content = "Login";
             }
+        }
+
+        async private System.Threading.Tasks.Task<float> FetchWalletData(string charID)
+        {
+            String request = this.apiBaseUrl + "char/AccountBalance.xml.aspx";
+            request += "?keyID=" + this.apiKey;
+            request += "&vCode=" + this.vCode;
+            request += "&characterID=" + charID;
+
+            HttpResponseMessage response = await new HttpClient().GetAsync(request);
+            string xml_data = await response.Content.ReadAsStringAsync();
+
+            XDocument characterdata = XDocument.Parse(xml_data);
+
+            var balance_data = from character in characterdata.Descendants("row")
+                                select new
+                                {
+                                    balance = character.Attribute("balance").Value,
+                                };
+
+            return float.Parse(balance_data.First().balance.Replace('.', ','));
         }
     }
 }
