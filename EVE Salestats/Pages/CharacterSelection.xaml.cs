@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 using EVE_Salestats.Char;
 
-namespace EVE_Salestats
+namespace EVE_Salestats.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -39,13 +39,14 @@ namespace EVE_Salestats
             charGrid.ColumnDefinitions.Add(spacerTop);
 
             int columnIndex = 1;
-            foreach(Character character in characters){
-                
+            foreach (Character character in characters)
+            {
+
                 // create a field for every character
                 ColumnDefinition columnDefinition = new ColumnDefinition();
                 columnDefinition.Width = new GridLength(200);
                 charGrid.ColumnDefinitions.Add(columnDefinition);
-                
+
                 // border arround
                 Button characterBox = new Button();
                 characterBox.Width = 160;
@@ -56,8 +57,8 @@ namespace EVE_Salestats
                 characterBox.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
                 Grid.SetColumn(characterBox, columnIndex);
                 Grid.SetRow(characterBox, 0);
+                characterBox.Click += SelectCharacter;
 
-                
 
                 // image
                 Image image = new Image();
@@ -67,7 +68,7 @@ namespace EVE_Salestats
                 image.Margin = new Thickness(10);
                 Grid.SetColumn(image, 0);
                 Grid.SetRow(image, 0);
-                
+
                 // name
                 TextBlock name = new TextBlock();
                 name.Text = character.Name;
@@ -132,6 +133,11 @@ namespace EVE_Salestats
             this.MainGrid.Children.Add(charGrid);
             Grid.SetRow(charGrid, 2);
             Grid.SetColumn(charGrid, 1);
+        }
+
+        private void SelectCharacter(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(EVE_Salestats.Pages.SaleStats));
         }
     }
 }

@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 
-namespace EVE_Salestats
+namespace EVE_Salestats.Pages
 {
 
     /// <summary>

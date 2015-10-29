@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="EVE_Salestats.Pages.SaleStats"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EVE_Salestats.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Backgrounds/ship.jpg"/>
+    </Page.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ListView HorizontalAlignment="Left" Height="554" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="237">
+            <ListViewHeaderItem Content="HEADER" />
+            <ListViewItem Content="Item" />
+            <ListViewItem Content="Item" />
+            <ListViewItem Content="Item" />
+            <ListViewItem Content="Item" />
+        </ListView>
+    </Grid>
+</Page>
