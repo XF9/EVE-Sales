@@ -31,8 +31,8 @@ namespace EVE_Salestats.Char
             private set { corp = value; }
         }
 
-        private float ballance;
-        public float Ballance
+        private double ballance;
+        public double Ballance
         {
             get { return ballance; }
             private set { ballance = value; }
@@ -46,7 +46,7 @@ namespace EVE_Salestats.Char
         }
 
 
-        public Character(String name, BitmapImage image, String charID, String corp, float balance)
+        public Character(String name, BitmapImage image, String charID, String corp, double balance)
         {
             this.Name = name;
             this.Image = image;

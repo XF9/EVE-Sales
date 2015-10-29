@@ -23,39 +23,45 @@ namespace EVE_Salestats.Char
 
         /// <summary>
         /// Load character data
+        /// <param name="apiKey">the api key</param>
+        /// <param name="vCode">the verification code</param>
+        /// <returns>all characters</returns>
         /// </summary>
         static async public Task<Character[]> LoadCharacters(string apiKey, string vCode)
         {
+            // build request string
             String request = CharacterLoader.apiBaseUrl + "account/Characters.xml.aspx?keyID=" + apiKey + "&vCode=" + vCode;
 
-                HttpResponseMessage response = await new HttpClient().GetAsync(request);
-                string xml_data = await response.Content.ReadAsStringAsync();
+            // load data as xml string
+            HttpResponseMessage response = await new HttpClient().GetAsync(request);
+            string xml_data = await response.Content.ReadAsStringAsync();
 
-                XDocument characterdata = XDocument.Parse(xml_data);
+            // parse as xml and fetch data
+            XDocument characterdata = XDocument.Parse(xml_data);
+            var characters = from character in characterdata.Descendants("row")
+                                select new
+                                {
+                                    Name = character.Attribute("name").Value,
+                                    CharID = character.Attribute("characterID").Value,
+                                    Corp = character.Attribute("corporationName").Value
+                                };
 
-                var characters = from character in characterdata.Descendants("row")
-                                 select new
-                                 {
-                                     Name = character.Attribute("name").Value,
-                                     CharID = character.Attribute("characterID").Value,
-                                     Corp = character.Attribute("corporationName").Value
-                                 };
+            //load data for each character
+            Character[] charlist = new Character[characters.Count()];
+            int index = 0;
 
-                Character[] charlist = new Character[characters.Count()];
-                int index = 0;
+            foreach (var character in characters)
+            {
+                Character charcter = new Character(
+                    character.Name, 
+                    await CharacterLoader.FetchImage(character.CharID, 128), 
+                    character.CharID, 
+                    character.Corp, 
+                    await CharacterLoader.FetchWalletData(apiKey, vCode, character.CharID));
+                charlist[index++] = charcter;
+            }
 
-                foreach (var character in characters)
-                {
-                    Character charcter = new Character(
-                        character.Name, 
-                        await CharacterLoader.FetchImage(character.CharID, 128), 
-                        character.CharID, 
-                        character.Corp, 
-                        await CharacterLoader.FetchWalletData(apiKey, vCode, character.CharID));
-                    charlist[index++] = charcter;
-                }
-
-                return charlist;
+            return charlist;
         }
 
         /// <summary>
@@ -65,7 +71,7 @@ namespace EVE_Salestats.Char
         /// <param name="vCode">the api verification code</param>
         /// <param name="charID">the character ID</param>
         /// <returns>the wallet ballance</returns>
-        static async private System.Threading.Tasks.Task<float> FetchWalletData(string apiKey, string vCode, string charID)
+        static async private System.Threading.Tasks.Task<double> FetchWalletData(string apiKey, string vCode, string charID)
         {
             // build request string
             String request = CharacterLoader.apiBaseUrl + "char/AccountBalance.xml.aspx";
@@ -84,9 +90,9 @@ namespace EVE_Salestats.Char
                                {
                                    balance = character.Attribute("balance").Value,
                                };
-
+            var f = balance_data.First();
             // return wallet ballance
-            return float.Parse(balance_data.First().balance.Replace('.', ','));
+            return double.Parse(balance_data.First().balance);
         }
 
         /// <summary>
@@ -97,10 +103,11 @@ namespace EVE_Salestats.Char
         /// <returns>the character image</returns>
         static async private System.Threading.Tasks.Task<BitmapImage> FetchImage(string charID, int size)
         {
+            // build request string and load image data
             string url = "https://image.eveonline.com/Character/" + charID + "_" + size.ToString() + ".jpg";
-
             byte[] contentBytes = await new HttpClient().GetByteArrayAsync(url);
 
+            // stream image data and store in bitmap image
             InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream();
             await stream.WriteAsync(contentBytes.AsBuffer());
             stream.Seek(0);

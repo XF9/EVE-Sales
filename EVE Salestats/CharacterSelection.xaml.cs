@@ -96,7 +96,7 @@ namespace EVE_Salestats
 
                 // ballance
                 TextBlock ballance = new TextBlock();
-                ballance.Text = character.Ballance + " ISK";
+                ballance.Text = character.Ballance.ToString("n", EVE_Salestats.Settings.numberFormat) + " ISK";
                 ballance.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
                 ballance.Margin = new Thickness(0, 0, 0, 0);
                 ballance.FontWeight = Windows.UI.Text.FontWeights.Normal;
@@ -129,13 +129,12 @@ namespace EVE_Salestats
                 characterData.Children.Add(corp);
                 characterData.Children.Add(ballance);
                 columnIndex++;
-
-                System.Diagnostics.Debug.WriteLine(character.Ballance);
             }
 
             charGrid.ColumnDefinitions.Add(spacerBottom);
             this.MainGrid.Children.Add(charGrid);
             Grid.SetRow(charGrid, 2);
+            Grid.SetColumn(charGrid, 1);
         }
     }
 }
