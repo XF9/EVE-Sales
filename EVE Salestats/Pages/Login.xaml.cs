@@ -48,8 +48,8 @@ namespace EVE_Salestats.Pages
         /// <param name="e"></param>
         async private void Button_Login_Click(object sender, RoutedEventArgs e)
         {
-            this.Errormsg.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            this.LoginButton.Content = "Fetching ..";
+            this.LoginForm.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            this.LoadingMessage.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             apiKey = this.ApiKey.Text;
             vCode = this.VerificationCode.Text;
@@ -66,12 +66,13 @@ namespace EVE_Salestats.Pages
             }
 
             try{
-                this.Frame.Navigate(typeof(CharacterSelection), await CharacterLoader.LoadCharacters(apiKey, vCode));
+                Character[] characters = await CharacterLoader.LoadCharacters(apiKey, vCode);
+                this.Frame.Navigate(typeof(CharacterSelection), characters);
             }
             catch (Exception)
             {
-                this.Errormsg.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                this.LoginButton.Content = "Login";
+                this.LoginForm.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                this.LoadingMessage.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             }
         }
     }

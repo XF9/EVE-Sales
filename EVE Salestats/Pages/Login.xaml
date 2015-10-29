@@ -9,93 +9,132 @@
     <Page.Background>
         <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Backgrounds/ship.jpg"/>
     </Page.Background>
+    <Page.Resources>
+        <Storyboard x:Name="LoginToLoading">
+            <DoubleAnimation 
+                AutoReverse="True"  
+                RepeatBehavior="forever" 
+                Duration="0:0:2" 
+                To="100.0" 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" 
+                Storyboard.TargetName="LoginForm" />
+        </Storyboard>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="3*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <Rectangle Grid.ColumnSpan="3" Grid.Column="1" Fill="#B2000000" HorizontalAlignment="Left" Height="230" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Top" Width="450"/>
+        <Rectangle Grid.RowSpan="3" 
+                   Grid.ColumnSpan="3" 
+                   Fill="#B2000000" 
+                   HorizontalAlignment="Stretch" 
+                   Grid.Row="0" 
+                   VerticalAlignment="Stretch"/>
 
         <TextBlock  Text="EVE Sales"
-                    Grid.Column="2"
+                    Grid.Column="1"
                     Grid.Row="1"
                     Grid.ColumnSpan="2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
-                    Margin="20,0"
                     FontSize="25"
                     FontWeight="Bold"
-                    Foreground="#09F"/>
+                    Foreground="#09F"
+                    Margin="0, 20"/>
+        
+        <Grid Grid.Column="1" Grid.Row="3" x:Name="LoginForm">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <TextBlock  Text="Api Key"
-                    Grid.Column="1"
+            
+
+            <TextBlock  Text="Api Key"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="0, 10"
+                    FontSize="15"/>
+
+            <TextBox x:Name="ApiKey"
+                 Height="30"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Stretch"
+                 Margin="0"
+                 Grid.Column="0"
+                 Grid.Row="1"/>
+
+            <TextBlock  Text="Verification Code"
+                    Grid.Column="0"
                     Grid.Row="2"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Margin="0"
-                    FontSize="15"
-                    Visibility="Collapsed"/>
+                    HorizontalAlignment="Left"
+                    Margin="0, 10"
+                    FontSize="15"/>
 
-        <TextBox x:Name="ApiKey"
-                 Width="200"
+            <TextBox x:Name="VerificationCode"
                  Height="30"
                  VerticalAlignment="Center"
-                 HorizontalAlignment="Left"
-                 Margin="20, 0"
-                 Grid.Column="2"
-                 Grid.Row="2" PlaceholderText="Api Key"/>
+                 HorizontalAlignment="Stretch"
+                 Margin="0"
+                 Grid.Column="0"
+                 Grid.Row="3"/>
 
-        <TextBlock  Text="Verification Code"
-                    Grid.Column="1"
-                    Grid.Row="3"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Margin="0"
-                    FontSize="15"
-                    Visibility="Collapsed"/>
+            <CheckBox x:Name="StoreData" 
+                      Content="Remember me" 
+                      Grid.Column="0" 
+                      HorizontalAlignment="Left"
+                      Margin="0, 10" 
+                      Grid.Row="4" 
+                      VerticalAlignment="Center"/>
 
-        <TextBox x:Name="VerificationCode"
-                 Width="200"
-                 Height="30"
-                 VerticalAlignment="Center"
-                 HorizontalAlignment="Left"
-                 Margin="20,0"
-                 Grid.Column="2"
-                 Grid.Row="3" PlaceholderText="Verification Code"/>
-
-        <Button x:Name="LoginButton"
-                Content="Login"
+            <Button x:Name="LoginButton"
+                Content="Load Characters"
                 Width="200"
                 Height="40"
                 VerticalAlignment="Top"
-                Margin="20,0"
-                Grid.Column="2"
+                Margin="0"
+                Grid.Column="0"
                 Grid.Row="5" Click="Button_Login_Click"/>
+        </Grid>
 
-        <CheckBox x:Name="StoreData" Content="Remember me" Grid.Column="2" HorizontalAlignment="Left" Margin="20,0" Grid.Row="4" VerticalAlignment="Center"/>
-
-        <TextBlock  Text="Could not fetch data"
-                    x:Name="Errormsg"
-                    Grid.Column="2"
-                    Grid.Row="6"
+        <Grid x:Name="LoadingMessage" Grid.Row="3" Grid.Column="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock  
+                    Text="Loading Characters .."
+                    Grid.Column="1"
+                    Grid.Row="0"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Margin="20"
-                    FontSize="15" Foreground="#FFEE1111" FontWeight="Bold" Visibility="Collapsed"/>
+                    Margin="10, 0"
+                    FontSize="15">
+            </TextBlock>
 
+            <ProgressRing IsActive="True"
+                          Grid.Column="0"
+                          Grid.Row="0"
+                          VerticalAlignment="Top"
+                          Width="20" Foreground="#FF0099FF"/>
+        </Grid>
     </Grid>
 </Page>
