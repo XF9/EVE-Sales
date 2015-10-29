@@ -113,6 +113,7 @@
       <DependentUpon>CharacterSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Char\Character.cs" />
+    <Compile Include="Char\CharacterLoader.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

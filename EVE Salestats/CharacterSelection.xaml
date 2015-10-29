@@ -19,30 +19,8 @@
                     Grid.Row="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Margin="0,10,0,10"
                     FontSize="25"
                     FontWeight="Bold"
-                    Foreground="#09F" Width="192"/>
-
-        <!--
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
-            <Border BorderBrush="White" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="260" Margin="20" VerticalAlignment="Top" Width="160" Background="#FF002036">
-
-            </Border>
-            <Image Grid.Column="2" HorizontalAlignment="Center" Height="128" VerticalAlignment="Top" Margin="0,20" Width="128"/>
-            <TextBlock TextWrapping="Wrap" Text="Harlekin Jie" HorizontalAlignment="Center" Margin="0,160,0,0" FontSize="15" FontWeight="Bold" Grid.Column="2"/>
-            <TextBlock TextWrapping="Wrap" Text="The awesome Corp" HorizontalAlignment="Center" Margin="0,190,0,0" FontSize="15" Grid.Column="2"/>
-            <TextBlock TextWrapping="Wrap" Text="1.000.042 ISK" HorizontalAlignment="Center" Margin="0,220,0,0" FontSize="15" Grid.Column="2"/>
-
-        </Grid>
--->
+                    Foreground="#09F" Width="192" TextAlignment="Center"/>
     </Grid>
 </Page>

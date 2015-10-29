@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Windows.UI.Xaml.Media.Imaging;
+
 namespace EVE_Salestats.Char
 {
     public class Character
@@ -36,17 +38,18 @@ namespace EVE_Salestats.Char
             private set { ballance = value; }
         }
 
-        private String imagePath;
-        public String ImagePath
+        private BitmapImage image;
+        public BitmapImage Image
         {
-            get { return imagePath; }
-            private set { imagePath = value; }
+            get { return image; }
+            private set { image = value; }
         }
 
 
-        public Character(String name, String charID, String corp, float balance)
+        public Character(String name, BitmapImage image, String charID, String corp, float balance)
         {
             this.Name = name;
+            this.Image = image;
             this.CharID = charID;
             this.Corp = corp;
             this.Ballance = balance;

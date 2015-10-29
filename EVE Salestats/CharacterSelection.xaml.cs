@@ -33,15 +33,12 @@ namespace EVE_Salestats
             Brush color_background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 32, 54));
 
             Character[] characters = e.Parameter as Character[];
-            System.Diagnostics.Debug.WriteLine(characters[0].Name);
 
             Grid charGrid = new Grid();
-
             ColumnDefinition spacerTop = new ColumnDefinition();
             ColumnDefinition spacerBottom = new ColumnDefinition();
             spacerTop.Width = new GridLength(1, GridUnitType.Star);
             spacerBottom.Width = new GridLength(1, GridUnitType.Star);
-
             charGrid.ColumnDefinitions.Add(spacerTop);
 
             int columnIndex = 1;
@@ -65,6 +62,15 @@ namespace EVE_Salestats
                 Grid.SetColumn(characterBox, columnIndex);
                 Grid.SetRow(characterBox, 0);
 
+                // image
+                Image image = new Image();
+                image.Source = character.Image;
+                image.Width = 128;
+                image.Height = 128;
+                image.Margin = new Thickness(10);
+                Grid.SetColumn(image, 0);
+                Grid.SetRow(image, 0);
+                
                 // name
                 TextBlock name = new TextBlock();
                 name.Text = character.Name;
@@ -118,6 +124,7 @@ namespace EVE_Salestats
 
                 charGrid.Children.Add(characterBox);
                 characterBox.Child = characterData;
+                characterData.Children.Add(image);
                 characterData.Children.Add(name);
                 characterData.Children.Add(corp);
                 characterData.Children.Add(ballance);
@@ -127,7 +134,6 @@ namespace EVE_Salestats
             }
 
             charGrid.ColumnDefinitions.Add(spacerBottom);
-
             this.MainGrid.Children.Add(charGrid);
             Grid.SetRow(charGrid, 2);
         }
