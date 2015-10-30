@@ -56,7 +56,14 @@ namespace EVE_Salestats
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                rootFrame = new Frame
+                {
+                    Background = new ImageBrush
+                    {
+                        ImageSource = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/Backgrounds/ship.jpg")),
+                        Stretch = Stretch.UniformToFill
+                    }
+                };
                 // Set the default language
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 

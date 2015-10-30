@@ -68,9 +68,9 @@ namespace EVE_Salestats.Pages
             }
 
             try{
-                //Character[] characters = await CharacterLoader.LoadCharacters(apiKey, vCode);
-                //this.Frame.Navigate(typeof(CharacterSelection), characters);
-                this.DisplayCharacterList(await CharacterLoader.LoadCharacters(apiKey, vCode));
+                Character[] characters = await CharacterLoader.LoadCharacters(apiKey, vCode);
+                this.Frame.Navigate(typeof(CharacterSelection), characters);
+                //this.DisplayCharacterList(await CharacterLoader.LoadCharacters(apiKey, vCode));
             }
             catch (Exception)
             {
