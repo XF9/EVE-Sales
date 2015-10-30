@@ -9,17 +9,7 @@
     <Page.Background>
         <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Backgrounds/ship.jpg"/>
     </Page.Background>
-    <Page.Resources>
-        <Storyboard x:Name="LoginToLoading">
-            <DoubleAnimation 
-                AutoReverse="True"  
-                RepeatBehavior="forever" 
-                Duration="0:0:2" 
-                To="100.0" 
-                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" 
-                Storyboard.TargetName="LoginForm" />
-        </Storyboard>
-    </Page.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25"/>
@@ -41,7 +31,7 @@
                    Grid.Row="0" 
                    VerticalAlignment="Stretch"/>
 
-        <TextBlock  Text="EVE Sales"
+        <TextBlock  Text="Api Keys"
                     Grid.Column="1"
                     Grid.Row="1"
                     Grid.ColumnSpan="2"
@@ -51,8 +41,9 @@
                     FontWeight="Bold"
                     Foreground="#09F"
                     Margin="0, 20"/>
-        
-        <Grid Grid.Column="1" Grid.Row="3" x:Name="LoginForm">
+
+        <!-- Login -->
+        <Grid Grid.Column="1" Grid.Row="3" x:Name="LoginForm" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -61,8 +52,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
-            
 
             <TextBlock  Text="Api Key"
                     Grid.Column="0"
@@ -97,7 +86,7 @@
                  Grid.Row="3"/>
 
             <CheckBox x:Name="StoreData" 
-                      Content="Remember me" 
+                      Content="Store Api Key and Verification Code" 
                       Grid.Column="0" 
                       HorizontalAlignment="Left"
                       Margin="0, 10" 
@@ -114,12 +103,13 @@
                 Grid.Row="5" Click="Button_Login_Click"/>
         </Grid>
 
+        <!-- Loading -->
         <Grid x:Name="LoadingMessage" Grid.Row="3" Grid.Column="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
+
             <TextBlock  
                     Text="Loading Characters .."
                     Grid.Column="1"
@@ -136,5 +126,9 @@
                           VerticalAlignment="Top"
                           Width="20" Foreground="#FF0099FF"/>
         </Grid>
+
+        <!-- Character List -->
+        <Grid Grid.Column="1" Grid.Row="3" x:Name="CharList" Visibility="Collapsed"/>
+
     </Grid>
 </Page>

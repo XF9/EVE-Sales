@@ -54,7 +54,7 @@ namespace EVE_Salestats.Char
             {
                 Character charcter = new Character(
                     character.Name, 
-                    await CharacterLoader.FetchImage(character.CharID, 128), 
+                    await CharacterLoader.FetchImage(character.CharID, 256), 
                     character.CharID, 
                     character.Corp, 
                     await CharacterLoader.FetchWalletData(apiKey, vCode, character.CharID));
