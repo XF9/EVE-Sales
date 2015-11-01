@@ -37,6 +37,8 @@
                     FontWeight="Bold"
                     Foreground="#09F"
                     Margin="0, 20"/>
+        
+        <Grid x:Name="CharGrid" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"/>
 
     </Grid>
 </Page>
