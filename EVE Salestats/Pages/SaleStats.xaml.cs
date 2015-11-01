@@ -41,12 +41,16 @@ namespace EVE_Salestats.Pages
             Character activeCharacter = e.Parameter as Character;
 
             var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID);
-            //var ta = await sqlite.ExecuteAsync("SELECT * FROM 'Transaction' GROUP BY TypeID");
-
-            ListViewItem test = new ListViewItem();
-            test.Content = "Test Me";
-
-            this.Itemlist.Items.Add(test);
+            List<Transaction> transactions = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' GROUP BY TypeID");
+            /*
+            foreach (Transaction transaction in transactions)
+            {
+                ListViewItem tmp = new ListViewItem();
+                tmp.Content = transaction;
+                this.Itemlist.Items.Add(tmp);
+            }
+             * */
+            this.Itemlist.ItemsSource = transactions;
         }
     }
 }

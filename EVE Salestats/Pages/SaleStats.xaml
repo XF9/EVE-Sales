@@ -52,8 +52,18 @@
                         />
 
         <Grid x:Name="CharGrid" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"/>
-        
-        <ListView x:Name="Itemlist" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"/>
+
+        <ListView x:Name="Itemlist" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Grid.ColumnSpan="2" ItemsSource="{Binding}">
+   
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding TypeName}" Margin="20, 0" SelectionHighlightColor="#FF0099FF" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
 
     </Grid>
 </Page>
