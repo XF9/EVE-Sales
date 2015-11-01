@@ -110,6 +110,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Char\AccountInfo.cs" />
+    <Compile Include="Char\Transaction.cs" />
     <Compile Include="Pages\CharacterSelection.xaml.cs">
       <DependentUpon>CharacterSelection.xaml</DependentUpon>
     </Compile>
@@ -117,6 +118,9 @@
     <Compile Include="Char\CharacterLoader.cs" />
     <Compile Include="Pages\LoadCharacters.xaml.cs">
       <DependentUpon>LoadCharacters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoadTransactions.xaml.cs">
+      <DependentUpon>LoadTransactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -126,6 +130,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Settings.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
     <Compile Include="Templates\CharacterDisplay.xaml.cs">
       <DependentUpon>CharacterDisplay.xaml</DependentUpon>
     </Compile>
@@ -136,6 +142,7 @@
     </AppxManifest>
     <None Include="ClassDiagram1.cd" />
     <None Include="EVE Salestats_TemporaryKey.pfx" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Backgrounds\ship.jpg" />
@@ -154,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\LoadCharacters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LoadTransactions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
