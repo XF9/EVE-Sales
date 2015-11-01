@@ -109,11 +109,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Char\AccountInfo.cs" />
     <Compile Include="Pages\CharacterSelection.xaml.cs">
       <DependentUpon>CharacterSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Char\Character.cs" />
     <Compile Include="Char\CharacterLoader.cs" />
+    <Compile Include="Pages\LoadCharacters.xaml.cs">
+      <DependentUpon>LoadCharacters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -146,6 +150,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Pages\CharacterSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LoadCharacters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

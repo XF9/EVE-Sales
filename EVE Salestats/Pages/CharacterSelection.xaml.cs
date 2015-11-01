@@ -52,5 +52,10 @@ namespace EVE_Salestats.Pages
         {
             this.Frame.Navigate(typeof(EVE_Salestats.Pages.SaleStats));
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(EVE_Salestats.Pages.Login));
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace EVE_Salestats.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async private void Button_Login_Click(object sender, RoutedEventArgs e)
+        private void Button_Login_Click(object sender, RoutedEventArgs e)
         {
             this.LoginForm.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             this.LoadingMessage.Visibility = Windows.UI.Xaml.Visibility.Visible;
@@ -67,9 +67,11 @@ namespace EVE_Salestats.Pages
             }
 
             try{
-                Character[] characters = await CharacterLoader.LoadCharacters(apiKey, vCode);
-                this.Frame.Navigate(typeof(CharacterSelection), characters);
-                //this.DisplayCharacterList(await CharacterLoader.LoadCharacters(apiKey, vCode));
+                
+                //Character[] characters = await CharacterLoader.LoadCharacters(apiKey, vCode);
+                //this.Frame.Navigate(typeof(CharacterSelection), characters);
+
+                this.Frame.Navigate(typeof(EVE_Salestats.Pages.LoadCharacters), new AccountInfo(apiKey, vCode));
             }
             catch (Exception)
             {
