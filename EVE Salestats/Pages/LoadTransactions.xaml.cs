@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using EVE_Salestats.Char;
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace EVE_Salestats.Pages
@@ -25,6 +27,12 @@ namespace EVE_Salestats.Pages
         public LoadTransactions()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Character character = e.Parameter as Character;
+            System.Diagnostics.Debug.WriteLine(character.Name);
         }
     }
 }

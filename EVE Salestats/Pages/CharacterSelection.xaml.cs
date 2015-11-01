@@ -40,17 +40,19 @@ namespace EVE_Salestats.Pages
                 rowDefinition.Height = Windows.UI.Xaml.GridLength.Auto;
                 this.CharGrid.RowDefinitions.Add(rowDefinition);
 
-                CharacterDisplay charInfo = new CharacterDisplay(character.Name, character.Corp + "\n" + character.Ballance.ToString("n", EVE_Salestats.Settings.numberFormat) + " ISK", character.Image);
+                CharacterDisplay charInfo = new CharacterDisplay(character);
                 Grid.SetRow(charInfo, index++);
                 Grid.SetColumn(charInfo, 0);
 
                 this.CharGrid.Children.Add(charInfo);
+
+                charInfo.OnSelect += SelectCharacter;
             }
         }
 
-        private void SelectCharacter(object sender, RoutedEventArgs e)
+        private void SelectCharacter(object sender, Character character)
         {
-            this.Frame.Navigate(typeof(EVE_Salestats.Pages.SaleStats));
+            this.Frame.Navigate(typeof(EVE_Salestats.Pages.LoadTransactions), character);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
