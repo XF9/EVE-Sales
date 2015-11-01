@@ -50,7 +50,6 @@ namespace EVE_Salestats.Pages
         async private void Button_Login_Click(object sender, RoutedEventArgs e)
         {
             this.LoginForm.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            this.CharList.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             this.LoadingMessage.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
             apiKey = this.ApiKey.Text;
@@ -76,10 +75,9 @@ namespace EVE_Salestats.Pages
             {
                 this.LoginForm.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 this.LoadingMessage.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                this.CharList.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             }
         }
-
+        /*
         private void DisplayCharacterList(Character[] characters)
         {
             int index = 0;
@@ -147,7 +145,7 @@ namespace EVE_Salestats.Pages
                 Grid.SetColumn(ballance, 1);
                 Grid.SetRow(ballance, 2);
                 */
-
+        /*
                 ColumnDefinition col_image = new ColumnDefinition();
                 ColumnDefinition col_data = new ColumnDefinition();
 
@@ -173,5 +171,6 @@ namespace EVE_Salestats.Pages
             this.LoadingMessage.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             this.CharList.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
+         * */
     }
 }

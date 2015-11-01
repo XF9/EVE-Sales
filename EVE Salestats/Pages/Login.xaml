@@ -6,11 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <!--
-    <Page.Background>
-        <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Backgrounds/ship.jpg"/>
-    </Page.Background>
-    -->
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25"/>
@@ -127,9 +123,6 @@
                           VerticalAlignment="Top"
                           Width="20" Foreground="#FF0099FF"/>
         </Grid>
-
-        <!-- Character List -->
-        <Grid Grid.Column="1" Grid.Row="3" x:Name="CharList" Visibility="Collapsed"/>
 
     </Grid>
 </Page>
