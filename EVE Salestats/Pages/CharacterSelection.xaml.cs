@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using EVE_Salestats.Char;
+using EVE_Salestats.Entities;
 using EVE_Salestats.Templates;
 
 namespace EVE_Salestats.Pages

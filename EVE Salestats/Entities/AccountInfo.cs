@@ -1,4 +1,4 @@
-﻿namespace EVE_Salestats.Char
+﻿namespace EVE_Salestats.Entities
 {
     /// <summary>
     /// A short summary of the account information

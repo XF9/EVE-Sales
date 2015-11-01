@@ -1,6 +1,5 @@
 ﻿using System;
 
-using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Xml;
@@ -14,8 +13,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 using System.Linq;
 
+using EVE_Salestats.Entities;
 
-namespace EVE_Salestats.Char
+namespace EVE_Salestats.Loader
 {
     class CharacterLoader
     {
@@ -27,7 +27,7 @@ namespace EVE_Salestats.Char
         /// <param name="vCode">the verification code</param>
         /// <returns>all characters</returns>
         /// </summary>
-        static async public Task<Character[]> LoadCharacters(string apiKey, string vCode)
+        static async public Task<Character[]> Load(string apiKey, string vCode)
         {
             // build request string
             String request = CharacterLoader.apiBaseUrl + "account/Characters.xml.aspx?keyID=" + apiKey + "&vCode=" + vCode;

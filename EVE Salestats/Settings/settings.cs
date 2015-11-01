@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Globalization;
 
+using EVE_Salestats.Entities;
+
 namespace EVE_Salestats
 {
     class Settings
     {
         public static NumberFormatInfo numberFormat;
+
+        public static AccountInfo accountInformation;
 
         static Settings()
         {

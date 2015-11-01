@@ -13,7 +13,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using EVE_Salestats.Char;
+using EVE_Salestats.Entities;
+using EVE_Salestats.Loader;
+
+using SQLite;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,10 +32,11 @@ namespace EVE_Salestats.Pages
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Character character = e.Parameter as Character;
-            System.Diagnostics.Debug.WriteLine(character.Name);
+            await TransactionLoader.Load(Settings.accountInformation.ApiKey, Settings.accountInformation.VCode, character.CharID);
+            this.Frame.Navigate(typeof(SaleStats), character);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Media.Animation;
 
-using EVE_Salestats.Char;
+using EVE_Salestats.Entities;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

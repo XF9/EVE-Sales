@@ -13,7 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using EVE_Salestats.Char;
+using EVE_Salestats.Entities;
+using EVE_Salestats.Loader;
+
 
 
 namespace EVE_Salestats.Pages
@@ -32,7 +34,8 @@ namespace EVE_Salestats.Pages
         {
             AccountInfo accountInfo = e.Parameter as AccountInfo;
 
-            Character[] characters = await CharacterLoader.LoadCharacters(accountInfo.ApiKey, accountInfo.VCode);
+            Character[] characters = await CharacterLoader.Load(accountInfo.ApiKey, accountInfo.VCode);
+            Settings.accountInformation = accountInfo;
             this.Frame.Navigate(typeof(CharacterSelection), characters);
         }
     }

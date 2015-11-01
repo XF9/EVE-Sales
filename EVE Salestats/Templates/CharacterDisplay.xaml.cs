@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Windows.UI.Xaml.Media.Imaging;
-using EVE_Salestats.Char;
+using EVE_Salestats.Entities;
 
 namespace EVE_Salestats.Templates
 {

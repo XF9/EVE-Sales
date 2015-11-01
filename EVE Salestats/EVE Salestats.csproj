@@ -109,13 +109,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Char\AccountInfo.cs" />
-    <Compile Include="Char\Transaction.cs" />
+    <Compile Include="Entities\AccountInfo.cs" />
+    <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="Loader\TransactionLoader.cs" />
     <Compile Include="Pages\CharacterSelection.xaml.cs">
       <DependentUpon>CharacterSelection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Char\Character.cs" />
-    <Compile Include="Char\CharacterLoader.cs" />
+    <Compile Include="Entities\Character.cs" />
+    <Compile Include="Loader\CharacterLoader.cs" />
     <Compile Include="Pages\LoadCharacters.xaml.cs">
       <DependentUpon>LoadCharacters.xaml</DependentUpon>
     </Compile>
@@ -145,7 +146,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Backgrounds\ship.jpg" />
+    <Content Include="Assets\Backgrounds\ship.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />

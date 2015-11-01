@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace EVE_Salestats.Char
+namespace EVE_Salestats.Entities
 {
     public class Character
     {

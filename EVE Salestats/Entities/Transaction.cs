@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 using SQLite;
 
-namespace EVE_Salestats.Char
+namespace EVE_Salestats.Entities
 {
-    enum TransactionType{
-        BUY,
-        SELL
-    }
 
     class Transaction
     {
-        private int id;
+        private long transactionID;
         /// <summary>
         /// Transaction id
         /// </summary>
         [PrimaryKey]
-        public int Id
+        public long TransactionID
         {
-            get { return id; }
-            set { id = value; }
+            get { return transactionID; }
+            set { transactionID = value; }
         }
 
         private DateTime time;
@@ -66,11 +62,11 @@ namespace EVE_Salestats.Char
             set { typeName = value; }
         }
 
-        private float pricePerUnit;
+        private double pricePerUnit;
         /// <summary>
         /// Price per unit
         /// </summary>
-        public float PricePerUnit
+        public double PricePerUnit
         {
             get { return pricePerUnit; }
             set { pricePerUnit = value; }
@@ -116,21 +112,32 @@ namespace EVE_Salestats.Char
             set { stationName = value; }
         }
 
-        private TransactionType transactionType;
+        private bool buyOrder;
         /// <summary>
-        /// Type: Buy or Sell
+        /// 1 - buy
+        /// 0 - sell
         /// </summary>
-        internal TransactionType TransactionType
+        public bool BuyOrder
         {
-            get { return transactionType; }
-            set { transactionType = value; }
+            get { return buyOrder; }
+            set { buyOrder = value; }
         }
 
-        private int journalTransactionID;
+        public String taFor;
+        /// <summary>
+        /// Wether the transaction is personal or corp wide
+        /// </summary>
+        public String TaFor
+        {
+            get { return taFor; }
+            set { taFor = value; }
+        }
+
+        private long journalTransactionID;
         /// <summary>
         /// Transaction ID within the players journal
         /// </summary>
-        public int JournalTransactionID
+        public long JournalTransactionID
         {
             get { return journalTransactionID; }
             set { journalTransactionID = value; }
