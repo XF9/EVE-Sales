@@ -11,18 +11,49 @@
             <EntranceThemeTransition/>
         </TransitionCollection>
     </Page.Transitions>
-
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <ListView HorizontalAlignment="Left" Height="554" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="237">
-            <ListViewHeaderItem Content="HEADER" />
-            <ListViewItem Content="Item" />
-            <ListViewItem Content="Item" />
-            <ListViewItem Content="Item" />
-            <ListViewItem Content="Item" />
-        </ListView>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Fill="#B2000000" HorizontalAlignment="Stretch" Grid.RowSpan="3" VerticalAlignment="Stretch" Grid.ColumnSpan="3"/>
+        <Rectangle Fill="#B2000000" HorizontalAlignment="Stretch" Grid.RowSpan="3" VerticalAlignment="Stretch" Grid.ColumnSpan="1" Grid.Column="4"/>
+
+        <TextBlock  Text="Items"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    FontSize="25"
+                    FontWeight="Bold"
+                    Foreground="#09F"
+                    Margin="70, 20"/>
+
+        <Button x:Name="backButton"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        VerticalAlignment="Center"
+                        Margin="10" Click="backButton_Click"
+                        />
+
+        <Grid x:Name="CharGrid" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"/>
+        
+        <ListView x:Name="Itemlist" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"/>
+
     </Grid>
 </Page>

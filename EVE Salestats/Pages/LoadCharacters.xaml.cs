@@ -36,7 +36,8 @@ namespace EVE_Salestats.Pages
 
             Character[] characters = await CharacterLoader.Load(accountInfo.ApiKey, accountInfo.VCode);
             Settings.accountInformation = accountInfo;
-            this.Frame.Navigate(typeof(CharacterSelection), characters);
+            Settings.characterList = characters;
+            this.Frame.Navigate(typeof(CharacterSelection));
         }
     }
 }

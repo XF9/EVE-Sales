@@ -11,6 +11,8 @@ namespace EVE_Salestats
 
         public static AccountInfo accountInformation;
 
+        public static Character[] characterList;
+
         static Settings()
         {
             Settings.numberFormat = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();

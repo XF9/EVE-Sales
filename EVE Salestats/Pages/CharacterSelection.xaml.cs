@@ -30,10 +30,8 @@ namespace EVE_Salestats.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Character[] characters = e.Parameter as Character[];
-
             int index = 0;
-            foreach (Character character in characters)
+            foreach (Character character in Settings.characterList)
             {
                 // create a field for every character
                 RowDefinition rowDefinition = new RowDefinition();

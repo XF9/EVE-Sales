@@ -13,6 +13,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using EVE_Salestats.Entities;
+
+using SQLite;
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace EVE_Salestats.Pages
@@ -25,6 +29,24 @@ namespace EVE_Salestats.Pages
         public SaleStats()
         {
             this.InitializeComponent();
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(EVE_Salestats.Pages.CharacterSelection));
+        }
+
+        async protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Character activeCharacter = e.Parameter as Character;
+
+            var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID);
+            //var ta = await sqlite.ExecuteAsync("SELECT * FROM 'Transaction' GROUP BY TypeID");
+
+            ListViewItem test = new ListViewItem();
+            test.Content = "Test Me";
+
+            this.Itemlist.Items.Add(test);
         }
     }
 }
