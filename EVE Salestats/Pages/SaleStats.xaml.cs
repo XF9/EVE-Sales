@@ -17,6 +17,8 @@ using EVE_Salestats.Entities;
 
 using SQLite;
 
+using WinRTXamlToolkit.Controls.DataVisualization.Charting;
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace EVE_Salestats.Pages
@@ -41,16 +43,11 @@ namespace EVE_Salestats.Pages
             Character activeCharacter = e.Parameter as Character;
 
             var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID);
-            List<Transaction> transactions = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' GROUP BY TypeID");
-            /*
-            foreach (Transaction transaction in transactions)
-            {
-                ListViewItem tmp = new ListViewItem();
-                tmp.Content = transaction;
-                this.Itemlist.Items.Add(tmp);
-            }
-             * */
+            List<Transaction> transactions = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' GROUP BY TypeID ORDER BY TypeName");
             this.Itemlist.ItemsSource = transactions;
+
+            List<Transaction> mexallon = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' WHERE TypeName = 'Mexallon' ORDER BY TypeName");
+            (LineChart.Series[0] as LineSeries).ItemsSource = mexallon;
         }
     }
 }

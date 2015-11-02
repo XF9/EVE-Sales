@@ -1,10 +1,11 @@
-﻿<Page
-    x:Class="EVE_Salestats.Pages.SaleStats"
+﻿<Page xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EVE_Salestats.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    x:Class="EVE_Salestats.Pages.SaleStats"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -15,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
@@ -23,38 +25,67 @@
             <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Rectangle Fill="#B2000000" HorizontalAlignment="Stretch" Grid.RowSpan="3" VerticalAlignment="Stretch" Grid.ColumnSpan="3"/>
-        <Rectangle Fill="#B2000000" HorizontalAlignment="Stretch" Grid.RowSpan="3" VerticalAlignment="Stretch" Grid.ColumnSpan="1" Grid.Column="4"/>
+        <Rectangle Fill="#B2000000" HorizontalAlignment="Stretch" Grid.RowSpan="4" VerticalAlignment="Stretch" Grid.ColumnSpan="3"/>
+        <Rectangle Fill="#B2000000" HorizontalAlignment="Stretch" Grid.RowSpan="4" VerticalAlignment="Stretch" Grid.ColumnSpan="2" Grid.Column="4"/>
 
         <TextBlock  Text="Items"
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    FontSize="25"
-                    FontWeight="Bold"
-                    Foreground="#09F"
-                    Margin="70, 20"/>
+			Grid.Column="1"
+			Grid.Row="1"
+			Grid.ColumnSpan="2"
+			VerticalAlignment="Center"
+			HorizontalAlignment="Left"
+			FontSize="25"
+			FontWeight="Bold"
+			Foreground="#09F"
+			Margin="70, 20"/>
+
+        <TextBlock  Text="Mexallon"
+			Grid.Column="5"
+			Grid.Row="1"
+			Grid.ColumnSpan="2"
+			VerticalAlignment="Center"
+			HorizontalAlignment="Left"
+			FontSize="25"
+			FontWeight="Bold"
+			Foreground="#09F"
+			Margin="0, 20"/>
 
         <Button x:Name="backButton"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        VerticalAlignment="Center"
-                        Margin="10" Click="backButton_Click"
+			Style="{StaticResource NavigationBackButtonNormalStyle}"
+			AutomationProperties.Name="Back"
+			AutomationProperties.AutomationId="BackButton"
+			AutomationProperties.ItemType="Navigation Button"
+			Grid.Column="1"
+			Grid.Row="1"
+			VerticalAlignment="Center"
+			Margin="10" Click="backButton_Click"
                         />
 
-        <Grid x:Name="CharGrid" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"/>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <ListView x:Name="Itemlist" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Grid.ColumnSpan="2" ItemsSource="{Binding}">
-   
+            <TextBlock Text="Filter" Grid.Row="0" FontSize="15" Margin="0, 10"/>
+            <SearchBox Grid.Row="1"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <CheckBox Content="Show Sellorders" Grid.Column="0" IsChecked="True"/>
+                <CheckBox Content="Show Buyorders" Grid.Column="1" IsChecked="True"/>
+            </Grid>
+        </Grid>
+
+        <ListView x:Name="Itemlist" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Grid.ColumnSpan="2" ItemsSource="{Binding}">
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -65,5 +96,26 @@
 
         </ListView>
 
+        <Grid Grid.Row="2" Grid.Column="5" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock  Text="Very flexible metallic mineral, dull to bright silvery green in color. Can be mixed with tritanium to make extremely hard alloys or it can be used by itself for various purposes. Fairly common in most regions."
+			            Grid.Column="0"
+			            Grid.Row="0"
+			            Grid.ColumnSpan="2"
+			            VerticalAlignment="Top"
+			            HorizontalAlignment="Left"
+			            FontSize="15" 
+                        TextWrapping="WrapWholeWords"/>
+
+            <Charting:Chart x:Name="LineChart" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="200" Grid.Row="1">
+                <Charting:LineSeries Title="Smartphone Companies" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True"/>
+            </Charting:Chart>
+            
+        </Grid>
     </Grid>
 </Page>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>WinRTXamlToolkit.Controls.DataVisualization.Windows</id>
+    <version>1.8.1.0</version>
+    <title>WinRT XAML Toolkit - Data Visualization Controls for Windows 8.1</title>
+    <authors>Filip Skakun,  Mahmoud Moussa,  Silverlight Toolkit Team</authors>
+    <owners>Filip Skakun,  Mahmoud Moussa,  Silverlight Toolkit Team</owners>
+    <licenseUrl>http://winrtxamltoolkit.codeplex.com/license</licenseUrl>
+    <projectUrl>http://winrtxamltoolkit.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Charting Controls for Windows 8.1, ported from the Silverlight Toolkit.</description>
+    <releaseNotes>Charting Controls for Windows 8.1, ported from the Silverlight Toolkit.
+
+      Features
+      - Pie Chart (PieSeries)
+      - Column Chart (ColumnSeries)
+      - Bar Chart (BarSeries)
+      - Line Chart (LineSeries)
+      - Area Chart (AreaSeries)
+      - Bubble Chart (BubbleSeries)
+      - Scatter Chart (ScatterSeries)
+      - Stacked Bar Chart (StackedBarSeries)
+      - 100% Stacked Bar Chart (Stacked100BarSeries)
+      - Stacked Column Chart (StackedColumnSeries)
+      - 100% Stacked Column Chart (Stacked100ColumnSeries)
+
+      See also
+      - WinRTXamlToolkit.Windows, WinRTXamlToolkit.WindowsPhone for various controls and tools
+      - WinRTXamlToolkit.Controls.Calendar.Windows, WinRTXamlToolkit.Controls.Calendar.WindowsPhone for a calendar control
+      - WinRTXamlToolkit.Controls.DataVisualization.Windows, WinRTXamlToolkit.Controls.DataVisualization.WindowsPhone for data visualization controls (charts)
+      - WinRTXamlToolkit.Controls.Gauge.Windows, WinRTXamlToolkit.Controls.Gauge.WindowsPhone for a gauge control
+      - WinRTXamlToolkit.Debugging.Windows, WinRTXamlToolkit.Debugging.WindowsPhone for debugging helpers</releaseNotes>
+    <language>en-US</language>
+    <tags>winrt xaml toolkit winrtxamltoolkit xyzzer chart charts pie piechart datavisualization data visualization bar column scatter</tags>
+    <dependencies>
+      <dependency id="WinRTXamlToolkit.Windows" version="1.8.1.0" />
+    </dependencies>
+  </metadata>
+</package>
