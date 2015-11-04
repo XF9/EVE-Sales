@@ -101,21 +101,32 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock  Text="Very flexible metallic mineral, dull to bright silvery green in color. Can be mixed with tritanium to make extremely hard alloys or it can be used by itself for various purposes. Fairly common in most regions."
 			            Grid.Column="0"
 			            Grid.Row="0"
-			            Grid.ColumnSpan="2"
 			            VerticalAlignment="Top"
 			            HorizontalAlignment="Left"
 			            FontSize="15" 
                         TextWrapping="WrapWholeWords"/>
 
-            <Charting:Chart x:Name="LineChart" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="200" Grid.Row="1">
-                <Charting:LineSeries Title="AVG Saleprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" Background="#FFFF0000" BorderBrush="#FF03FF1A" Foreground="#FF9D01E6">
-                    
-                </Charting:LineSeries>
+            <TextBlock  Text="Price per Unit"
+			            Grid.Column="0"
+			            Grid.Row="1"
+			            VerticalAlignment="Top"
+			            HorizontalAlignment="Left"
+			            FontSize="15"
+                        FontWeight="Bold"
+                        Margin="0 ,20 , 0, 0"
+                        TextWrapping="WrapWholeWords"/>
+            
+            <Charting:Chart x:Name="LineChart" x:Uid="LineChartUnits" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="200" Grid.Row="2">
+                <Charting:LineSeries Title="Saleprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" />
+                <Charting:LineSeries Title="AVG Saleprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" />
+                <Charting:LineSeries Title="Buyprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" />
+                <Charting:LineSeries Title="AVG Buyprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" />
             </Charting:Chart>
             
         </Grid>
