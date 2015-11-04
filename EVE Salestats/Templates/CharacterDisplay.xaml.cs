@@ -14,17 +14,20 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Windows.UI.Xaml.Media.Imaging;
-using EVE_Salestats.Entities;
+using EVE_SaleTools.Entities;
 
-namespace EVE_Salestats.Templates
+namespace EVE_SaleTools.Templates
 {
+    /// <summary>
+    /// This template will display character stats
+    /// </summary>
     public sealed partial class CharacterDisplay : UserControl
     {
         private Character character;
 
         public event EventHandler<Character> OnSelect;
 
-        protected void EmitEvent(Character e)
+        private void EmitEvent(Character e)
         {
             EventHandler<Character> handler = OnSelect;
             if (handler != null)
@@ -38,7 +41,7 @@ namespace EVE_Salestats.Templates
             this.InitializeComponent();
             this.character = character;
             this.CharacterName.Text = character.Name;
-            this.CharacterDescription.Text = character.Corp + "\n" + character.Ballance.ToString("n", EVE_Salestats.Settings.numberFormat) + " ISK";
+            this.CharacterDescription.Text = character.Corp + "\n" + character.Ballance.ToString("n", EVE_SaleTools.Settings.numberFormat) + " ISK";
             this.CharacterImage.Source = character.Image;
         }
 

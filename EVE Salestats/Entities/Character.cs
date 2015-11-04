@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace EVE_Salestats.Entities
+namespace EVE_SaleTools.Entities
 {
+    /// <summary>
+    /// A pilot
+    /// </summary>
     public class Character
     {
         private String name;
+        /// <summary>
+        /// Name of the pilot
+        /// </summary>
         public String Name
         {
             get { return name; }
@@ -18,6 +24,9 @@ namespace EVE_Salestats.Entities
         }
 
         private String charID;
+        /// <summary>
+        /// Charcater ID
+        /// </summary>
         public String CharID
         {
             get { return charID; }
@@ -25,6 +34,9 @@ namespace EVE_Salestats.Entities
         }
 
         private String corp;
+        /// <summary>
+        /// Corporation this pilot belongs to
+        /// </summary>
         public String Corp
         {
             get { return corp; }
@@ -32,6 +44,9 @@ namespace EVE_Salestats.Entities
         }
 
         private double ballance;
+        /// <summary>
+        /// Pilots current ballance
+        /// </summary>
         public double Ballance
         {
             get { return ballance; }
@@ -39,13 +54,23 @@ namespace EVE_Salestats.Entities
         }
 
         private BitmapImage image;
+        /// <summary>
+        /// Pilot image 
+        /// </summary>
         public BitmapImage Image
         {
             get { return image; }
             private set { image = value; }
         }
 
-
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        /// <param name="name">Pilot name</param>
+        /// <param name="image">Pilot image</param>
+        /// <param name="charID">Character ID</param>
+        /// <param name="corp">Corporation Name</param>
+        /// <param name="balance">Wallet ballance</param>
         public Character(String name, BitmapImage image, String charID, String corp, double balance)
         {
             this.Name = name;

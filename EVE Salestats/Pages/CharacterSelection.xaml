@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="EVE_Salestats.Pages.CharacterSelection"
+    x:Class="EVE_SaleTools.Pages.CharacterSelection"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:EVE_Salestats"
+    xmlns:local="using:EVE_SaleTools"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -46,7 +46,7 @@
                         Grid.Column="1"
                         Grid.Row="1"
                         VerticalAlignment="Center"
-                        Margin="10" Click="backButton_Click"
+                        Margin="10" Click="Back"
                         />
 
         <Grid x:Name="CharGrid" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"/>

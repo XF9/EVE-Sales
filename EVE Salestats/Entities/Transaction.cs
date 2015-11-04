@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 using SQLite;
 
-namespace EVE_Salestats.Entities
+namespace EVE_SaleTools.Entities
 {
-
+    /// <summary>
+    /// A transaction, done by the 
+    /// </summary>
     class Transaction
     {
         private long transactionID;

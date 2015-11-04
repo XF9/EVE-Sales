@@ -13,16 +13,19 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using EVE_Salestats.Entities;
-using EVE_Salestats.Templates;
+using EVE_SaleTools.Entities;
+using EVE_SaleTools.Templates;
 
-namespace EVE_Salestats.Pages
+namespace EVE_SaleTools.Pages
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// This page let's you select the character whoms transaction data should be loaded
     /// </summary>
     public sealed partial class CharacterSelection : Page
     {
+        /// <summary>
+        /// Ctor.
+        /// </summary>
         public CharacterSelection()
         {
             this.InitializeComponent();
@@ -50,12 +53,12 @@ namespace EVE_Salestats.Pages
 
         private void SelectCharacter(object sender, Character character)
         {
-            this.Frame.Navigate(typeof(EVE_Salestats.Pages.LoadTransactions), character);
+            this.Frame.Navigate(typeof(EVE_SaleTools.Pages.LoadTransactions), character);
         }
 
-        private void backButton_Click(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(EVE_Salestats.Pages.Login));
+            this.Frame.Navigate(typeof(EVE_SaleTools.Pages.Login));
         }
     }
 }

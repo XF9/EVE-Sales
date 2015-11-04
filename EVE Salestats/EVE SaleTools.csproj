@@ -7,7 +7,7 @@
     <ProjectGuid>{E5171011-2AD2-45DF-B0B9-3AAD771CB4F2}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EVE_Salestats</RootNamespace>
+    <RootNamespace>EVE_SaleTools</RootNamespace>
     <AssemblyName>EVE Salestats</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>

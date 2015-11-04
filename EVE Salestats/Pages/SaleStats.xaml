@@ -1,11 +1,11 @@
 ﻿<Page xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:EVE_Salestats.Pages"
+    xmlns:local="using:EVE_SaleTools.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
-    x:Class="EVE_Salestats.Pages.SaleStats"
+    x:Class="EVE_SaleTools.Pages.SaleStats"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -113,7 +113,9 @@
                         TextWrapping="WrapWholeWords"/>
 
             <Charting:Chart x:Name="LineChart" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="200" Grid.Row="1">
-                <Charting:LineSeries Title="Smartphone Companies" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True"/>
+                <Charting:LineSeries Title="AVG Saleprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" Background="#FFFF0000" BorderBrush="#FF03FF1A" Foreground="#FF9D01E6">
+                    
+                </Charting:LineSeries>
             </Charting:Chart>
             
         </Grid>

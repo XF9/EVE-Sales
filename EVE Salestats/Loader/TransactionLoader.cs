@@ -11,12 +11,22 @@ using System.Xml.Linq;
 
 using SQLite;
 
-using EVE_Salestats.Entities;
+using EVE_SaleTools.Entities;
 
-namespace EVE_Salestats.Loader
+namespace EVE_SaleTools.Loader
 {
+    /// <summary>
+    /// This one loads all transactions for a given character
+    /// </summary>
     class TransactionLoader
     {
+        /// <summary>
+        /// Load transaction data and store in local sqlite db
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="vCode"></param>
+        /// <param name="charID"></param>
+        /// <returns></returns>
         public async static Task<bool> Load(string apiKey, string vCode, string charID)
         {
             // open DB
@@ -54,6 +64,7 @@ namespace EVE_Salestats.Loader
                                  ClientTypeID = transaction.Attribute("clientTypeID").Value ?? ""
                              };
             
+            // create new transaction for each record
             foreach (var transaction in transactions)
             {
                 Transaction ta = new Transaction();
@@ -73,7 +84,7 @@ namespace EVE_Salestats.Loader
                 ta.JournalTransactionID = Int64.Parse(transaction.JournalTransactionID);
                 ta.ClientTypeID = Int32.Parse(transaction.ClientTypeID);
 
-                //TODO: Insert or ignore to make it faster
+                //TODO: Insert or ignore to make it faster?
                 await sqlite.InsertOrReplaceAsync(ta);
             }
 

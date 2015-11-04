@@ -13,12 +13,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using EVE_Salestats.Entities;
-using EVE_Salestats.Loader;
+using EVE_SaleTools.Entities;
+using EVE_SaleTools.Loader;
 
 
 
-namespace EVE_Salestats.Pages
+namespace EVE_SaleTools.Pages
 {
     /// <summary>
     /// This page will load all characters and forward to character selection after loading
@@ -32,11 +32,15 @@ namespace EVE_Salestats.Pages
 
         async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // Load
             AccountInfo accountInfo = e.Parameter as AccountInfo;
-
             Character[] characters = await CharacterLoader.Load(accountInfo.ApiKey, accountInfo.VCode);
+
+            //Store local
             Settings.accountInformation = accountInfo;
             Settings.characterList = characters;
+
+            // Forward
             this.Frame.Navigate(typeof(CharacterSelection));
         }
     }

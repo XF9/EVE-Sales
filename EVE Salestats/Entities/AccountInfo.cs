@@ -1,4 +1,4 @@
-﻿namespace EVE_Salestats.Entities
+﻿namespace EVE_SaleTools.Entities
 {
     /// <summary>
     /// A short summary of the account information
@@ -31,6 +31,11 @@
             private set { vCode = value; }
         }
 
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        /// <param name="apiKey">the api key</param>
+        /// <param name="vCode">the corrosponding verification code</param>
         public AccountInfo(string apiKey, string vCode)
         {
             this.apiKey = apiKey;

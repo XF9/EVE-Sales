@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="EVE_Salestats.App">
-      <m2:VisualElements DisplayName="EVE Salestats" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="EVE Salestats" ForegroundText="light" BackgroundColor="#464646">
+      <m2:VisualElements DisplayName="EVE SaleTools" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="EVE SaleTools will display your transaction and give you a good overview on what you are selling/buying and at what price." ForegroundText="light" BackgroundColor="#464646">
         <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#3d6074" />
       </m2:VisualElements>
     </Application>

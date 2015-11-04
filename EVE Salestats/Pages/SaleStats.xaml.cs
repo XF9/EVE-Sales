@@ -13,18 +13,16 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using EVE_Salestats.Entities;
+using EVE_SaleTools.Entities;
 
 using SQLite;
 
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace EVE_Salestats.Pages
+namespace EVE_SaleTools.Pages
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// This page will display all transactions
     /// </summary>
     public sealed partial class SaleStats : Page
     {
@@ -35,18 +33,20 @@ namespace EVE_Salestats.Pages
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(EVE_Salestats.Pages.CharacterSelection));
+            this.Frame.Navigate(typeof(EVE_SaleTools.Pages.CharacterSelection));
         }
 
         async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Character activeCharacter = e.Parameter as Character;
 
+            // load all transaction items
             var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID);
             List<Transaction> transactions = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' GROUP BY TypeID ORDER BY TypeName");
             this.Itemlist.ItemsSource = transactions;
 
-            List<Transaction> mexallon = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' WHERE TypeName = 'Mexallon' ORDER BY TypeName");
+            // tmp - query mexallon stats
+            List<Transaction> mexallon = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = 'Mexallon' AND BuyOrder = 0 GROUP BY strftime('%d-%m-%Y',Time)");
             (LineChart.Series[0] as LineSeries).ItemsSource = mexallon;
         }
     }

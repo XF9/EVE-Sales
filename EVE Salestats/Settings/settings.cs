@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Globalization;
 
-using EVE_Salestats.Entities;
+using EVE_SaleTools.Entities;
 
-namespace EVE_Salestats
+namespace EVE_SaleTools
 {
+    /// <summary>
+    /// Class to store all temporary settings
+    /// </summary>
     class Settings
     {
         public static NumberFormatInfo numberFormat;

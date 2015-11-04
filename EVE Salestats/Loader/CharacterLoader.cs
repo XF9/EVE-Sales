@@ -13,10 +13,13 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 using System.Linq;
 
-using EVE_Salestats.Entities;
+using EVE_SaleTools.Entities;
 
-namespace EVE_Salestats.Loader
+namespace EVE_SaleTools.Loader
 {
+    /// <summary>
+    /// This one will load all character data
+    /// </summary>
     class CharacterLoader
     {
         private static String apiBaseUrl = "https://api.eveonline.com/";
@@ -46,10 +49,11 @@ namespace EVE_Salestats.Loader
                                     Corp = character.Attribute("corporationName").Value
                                 };
 
-            //load data for each character
+            // load data for each character
             Character[] charlist = new Character[characters.Count()];
             int index = 0;
 
+            // create a a new character for each one
             foreach (var character in characters)
             {
                 Character charcter = new Character(
