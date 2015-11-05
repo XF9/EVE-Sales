@@ -16,6 +16,15 @@ using EVE_SaleTools.Entities;
 namespace EVE_SaleTools.Loader
 {
     /// <summary>
+    /// What order Type should be queried
+    /// </summary>
+    enum OrderType{
+        SELL,
+        BUY,
+        BOTH
+    }
+
+    /// <summary>
     /// This one loads all transactions for a given character
     /// </summary>
     class TransactionLoader
@@ -27,10 +36,10 @@ namespace EVE_SaleTools.Loader
         /// <param name="vCode"></param>
         /// <param name="charID"></param>
         /// <returns></returns>
-        public async static Task<bool> Load(string apiKey, string vCode, string charID)
+        public async static Task<bool> Parse(string apiKey, string vCode, string charID)
         {
             // open DB
-            var sqlite = new SQLiteAsyncConnection(charID);
+            var sqlite = new SQLiteAsyncConnection(charID + ".sqlite");
             await sqlite.CreateTableAsync<Transaction>();
 
             // build request string
@@ -89,6 +98,43 @@ namespace EVE_SaleTools.Loader
             }
 
             return false;
+        }
+
+        async public static Task<List<Transaction>> GetByTypeName(string charID, string TypeName, OrderType orderType, bool groupOnDay)
+        {
+            //TODO check if file eyists
+            var sqlite = new SQLiteAsyncConnection(charID + ".sqlite");
+            List<Transaction> resultset = new List<Transaction>();
+            List<string> whereClause = new List<string>();
+
+            string requestString = "SELECT * FROM 'Transaction' ";
+
+            // build where
+            if (TypeName.Length > 0)
+                whereClause.Add("TypeName = " + TypeName);
+            
+            if(orderType == OrderType.SELL)
+                whereClause.Add("BuyOrder = 0");
+            else if (orderType == OrderType.BUY)
+                whereClause.Add("BuyOrder = 1");
+
+            if (whereClause.Count > 0)
+                requestString += "WHERE " + String.Join(" AND ", whereClause.ToArray()) + " ";
+
+            // group by
+            if (TypeName.Length > 0 && groupOnDay)
+                requestString += "GROUP BY strftime('%d-%m-%Y',Time)";
+
+            try
+            {
+                resultset = await sqlite.QueryAsync<Transaction>(requestString);
+            }
+            catch(Exception )
+            {
+                System.Diagnostics.Debug.WriteLine("query failed: " + requestString);
+            }
+
+            return resultset;
         }
     }
 }

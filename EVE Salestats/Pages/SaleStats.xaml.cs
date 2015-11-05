@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI;
 
 using EVE_SaleTools.Entities;
+using EVE_SaleTools.Loader;
 
 using SQLite;
 
@@ -118,6 +119,12 @@ namespace EVE_SaleTools.Pages
                 (LineChart.Series[1] as LineSeries).ItemsSource = new List<Transaction>() { begin, end };
 
             }
+
+
+
+            List<Transaction> mexallonAll = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' WHERE TypeName = 'Mexallon' ORDER BY Time");
+            this.ListViewTransactions.ItemsSource = mexallonAll;
+
         }
     }
 }

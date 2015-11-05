@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:controls="using:WinRTXamlToolkit.Controls"
+    xmlns:data="using:WinRTXamlToolkit.Controls.Data"
     x:Class="EVE_SaleTools.Pages.SaleStats"
     mc:Ignorable="d">
     <Page.Transitions>
@@ -83,7 +85,18 @@
                 <CheckBox Content="Show Buyorders" Grid.Column="1" IsChecked="True"/>
             </Grid>
         </Grid>
-
+<!--
+        <controls:TreeView x:Name="Itemlist" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding TreeItems}">
+            <controls:TreeView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding TypeName}"/>
+                    <data:DataTemplateExtensions.Hierarchy>
+                        <data:HierarchicalDataTemplate ItemsSource="{Binding TypeName}" />
+                    </data:DataTemplateExtensions.Hierarchy>
+                </DataTemplate>
+            </controls:TreeView.ItemTemplate>
+        </controls:TreeView>
+-->
         <ListView x:Name="Itemlist" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Grid.ColumnSpan="2" ItemsSource="{Binding}">
 
             <ListView.ItemTemplate>
@@ -93,11 +106,11 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
 
         <Grid Grid.Row="2" Grid.Column="5" Grid.RowSpan="2">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -128,7 +141,26 @@
                 <Charting:LineSeries Title="Buyprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" />
                 <Charting:LineSeries Title="AVG Buyprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" />
             </Charting:Chart>
-            
+
+            <ListView Name="ListViewTransactions" VerticalAlignment="Stretch" Grid.Row="3">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid VerticalAlignment="Stretch">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{Binding Time}" />
+                            <TextBlock Grid.Column="1" Text="{Binding Quantity}" />
+                            <TextBlock Grid.Column="2" Text="{Binding PricePerUnit}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </Grid>
     </Grid>
 </Page>

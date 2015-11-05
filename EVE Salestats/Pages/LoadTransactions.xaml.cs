@@ -36,7 +36,7 @@ namespace EVE_SaleTools.Pages
         {
             // Load
             Character character = e.Parameter as Character;
-            await TransactionLoader.Load(Settings.accountInformation.ApiKey, Settings.accountInformation.VCode, character.CharID);
+            await TransactionLoader.Parse(Settings.accountInformation.ApiKey, Settings.accountInformation.VCode, character.CharID);
 
             // Forward
             this.Frame.Navigate(typeof(SaleStats), character);
