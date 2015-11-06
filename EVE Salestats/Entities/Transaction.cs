@@ -11,7 +11,7 @@ namespace EVE_SaleTools.Entities
     /// <summary>
     /// A transaction, done by the 
     /// </summary>
-    class Transaction
+    public class Transaction
     {
         private long transactionID;
         /// <summary>
@@ -153,6 +153,30 @@ namespace EVE_SaleTools.Entities
         {
             get { return clientTypeID; }
             set { clientTypeID = value; }
+        }
+
+        private String parentName;
+        /// <summary>
+        /// Name of the parent group
+        /// </summary>
+        public String ParentName
+        {
+            get { return parentName; }
+            set { parentName = value; }
+        }
+
+        private int marketGroupID;
+        public int MarketGroupID
+        {
+            get { return marketGroupID; }
+            set { marketGroupID = value; }
+        }
+
+        private string marketGroupName;
+        public string MarketGroupName
+        {
+            get { return marketGroupName; }
+            set { marketGroupName = value; }
         }
     }
 }

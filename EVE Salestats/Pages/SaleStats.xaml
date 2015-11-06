@@ -7,6 +7,7 @@
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     xmlns:controls="using:WinRTXamlToolkit.Controls"
     xmlns:data="using:WinRTXamlToolkit.Controls.Data"
+    xmlns:custom="using:EVE_SaleTools.Templates"
     x:Class="EVE_SaleTools.Pages.SaleStats"
     mc:Ignorable="d">
     <Page.Transitions>
@@ -97,7 +98,7 @@
             </controls:TreeView.ItemTemplate>
         </controls:TreeView>
 -->
-        <ListView x:Name="Itemlist" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Grid.ColumnSpan="2" ItemsSource="{Binding}">
+        <ListView x:Name="Itemlist" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Grid.ColumnSpan="2" ItemsSource="{Binding}" Visibility="Collapsed">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -107,6 +108,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
+        <custom:TransactionListCategoryList x:Name="Categories" Grid.Column="1" Grid.Row="3" Margin="0, 20, 0, 0">
+            
+        </custom:TransactionListCategoryList>
 
         <Grid Grid.Row="2" Grid.Column="5" Grid.RowSpan="2">
             <Grid.RowDefinitions>
@@ -142,7 +147,7 @@
                 <Charting:LineSeries Title="AVG Buyprice per unit" Margin="0" IndependentValuePath="Time" DependentValuePath="PricePerUnit" IsSelectionEnabled="True" />
             </Charting:Chart>
 
-            <ListView Name="ListViewTransactions" VerticalAlignment="Stretch" Grid.Row="3">
+            <ListView Name="ListViewTransactions" VerticalAlignment="Stretch" Grid.Row="3" Visibility="Collapsed">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid VerticalAlignment="Stretch">

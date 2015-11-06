@@ -44,10 +44,11 @@ namespace EVE_SaleTools.Pages
             Character activeCharacter = e.Parameter as Character;
 
             // load all transaction items
-            var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID);
+            var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID + ".sqlite");
 
             List<Transaction> items = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' GROUP BY TypeID ORDER BY TypeName");
             this.Itemlist.ItemsSource = items;
+            this.Categories.AddItems(items);
 
             // tmp - query mexallon stats
 

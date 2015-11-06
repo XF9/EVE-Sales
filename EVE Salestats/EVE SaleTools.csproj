@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Entities\AccountInfo.cs" />
     <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="Entities\TransactionInformation.cs" />
     <Compile Include="Loader\TransactionLoader.cs" />
     <Compile Include="Pages\CharacterSelection.xaml.cs">
       <DependentUpon>CharacterSelection.xaml</DependentUpon>
@@ -136,11 +137,20 @@
     <Compile Include="Templates\CharacterDisplay.xaml.cs">
       <DependentUpon>CharacterDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\TransactionListCategoryList.xaml.cs">
+      <DependentUpon>TransactionListCategoryList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\TransactionListItemList.xaml.cs">
+      <DependentUpon>TransactionListItemList.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\Data\static.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="ClassDiagram1.cd" />
     <None Include="EVE Salestats_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -180,6 +190,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Templates\CharacterDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\TransactionListCategoryList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Templates\TransactionListItemList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

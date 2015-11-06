@@ -39,8 +39,10 @@ namespace EVE_SaleTools.Loader
         public async static Task<bool> Parse(string apiKey, string vCode, string charID)
         {
             // open DB
-            var sqlite = new SQLiteAsyncConnection(charID + ".sqlite");
-            await sqlite.CreateTableAsync<Transaction>();
+            var sqliteTransactionData = new SQLiteAsyncConnection(charID + ".sqlite");
+            await sqliteTransactionData.CreateTableAsync<Transaction>();
+
+            //await sqliteTransactionData.ExecuteAsync("ATTACH DATABASE '" + Windows.ApplicationModel.Package.Current.InstalledLocation.Path + "\\Assets\\Data\\static.sqlite' AS Static");
 
             // build request string
             String request = "https://api.eveonline.com/char/WalletTransactions.xml.aspx";
@@ -93,8 +95,13 @@ namespace EVE_SaleTools.Loader
                 ta.JournalTransactionID = Int64.Parse(transaction.JournalTransactionID);
                 ta.ClientTypeID = Int32.Parse(transaction.ClientTypeID);
 
+                TransactionInformation info = await TransactionInformation.Load(ta.TypeID);
+
+                ta.MarketGroupID = info.MarketGroupIDTopLevel;
+                ta.MarketGroupName = info.MarketGroupNameTopLevel;
+
                 //TODO: Insert or ignore to make it faster?
-                await sqlite.InsertOrReplaceAsync(ta);
+                await sqliteTransactionData.InsertOrReplaceAsync(ta);
             }
 
             return false;
