@@ -19,8 +19,13 @@ using EVE_SaleTools.Entities;
 
 namespace EVE_SaleTools.Templates
 {
+
     public sealed partial class TransactionListItemList : UserControl
     {
+        private Dictionary<string, Transaction> taBinding = new Dictionary<string, Transaction>();
+
+        public EventHandler<ItemSelectedEventArgs> ItemSelect;
+
         public TransactionListItemList()
         {
             this.InitializeComponent();
@@ -50,6 +55,16 @@ namespace EVE_SaleTools.Templates
             ListViewItem entry = new ListViewItem();
             entry.Content = ta.TypeName;
             this.ItemList.Items.Add(entry);
+            this.taBinding.Add(ta.TypeName, ta);
+        }
+
+        private void ItemList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            EventHandler<ItemSelectedEventArgs> handler = this.ItemSelect;
+            ItemSelectedEventArgs args = new ItemSelectedEventArgs();
+            args.transaction = this.taBinding[(string)(e.ClickedItem)];
+            if (handler != null)
+                handler(this, args);
         }
 
 

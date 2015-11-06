@@ -46,7 +46,8 @@
 			Foreground="#09F"
 			Margin="70, 20"/>
 
-        <TextBlock  Text="Mexallon"
+        <TextBlock  x:Name="ItemTitle"
+            Text=""
 			Grid.Column="5"
 			Grid.Row="1"
 			Grid.ColumnSpan="2"
@@ -55,7 +56,15 @@
 			FontSize="25"
 			FontWeight="Bold"
 			Foreground="#09F"
-			Margin="0, 20"/>
+			Margin="0, 20">
+
+            <TextBlock.Transitions>
+                <TransitionCollection>
+                    <ContentThemeTransition/>
+                </TransitionCollection>
+            </TextBlock.Transitions>
+            
+        </TextBlock>
 
         <Button x:Name="backButton"
 			Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -122,13 +131,20 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock  Text="Very flexible metallic mineral, dull to bright silvery green in color. Can be mixed with tritanium to make extremely hard alloys or it can be used by itself for various purposes. Fairly common in most regions."
+            <TextBlock  x:Name="ItemDescription"
+                        Text=""
 			            Grid.Column="0"
 			            Grid.Row="0"
 			            VerticalAlignment="Top"
 			            HorizontalAlignment="Left"
 			            FontSize="15" 
-                        TextWrapping="WrapWholeWords"/>
+                        TextWrapping="WrapWholeWords">
+                <TextBlock.Transitions>
+                    <TransitionCollection>
+                        <ContentThemeTransition/>
+                    </TransitionCollection>
+                </TextBlock.Transitions>
+            </TextBlock>
 
             <TextBlock  Text="Price per Unit"
 			            Grid.Column="0"

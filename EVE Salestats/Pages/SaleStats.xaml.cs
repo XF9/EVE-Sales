@@ -29,6 +29,8 @@ namespace EVE_SaleTools.Pages
     /// </summary>
     public sealed partial class SaleStats : Page
     {
+        Character activeCharacter;
+
         public SaleStats()
         {
             this.InitializeComponent();
@@ -41,7 +43,7 @@ namespace EVE_SaleTools.Pages
 
         async protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Character activeCharacter = e.Parameter as Character;
+            activeCharacter = e.Parameter as Character;
 
             // load all transaction items
             var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID + ".sqlite");
@@ -49,8 +51,7 @@ namespace EVE_SaleTools.Pages
             List<Transaction> items = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' GROUP BY TypeID ORDER BY TypeName");
             this.Itemlist.ItemsSource = items;
             this.Categories.AddItems(items);
-
-            // tmp - query mexallon stats
+            this.Categories.ItemSelect += this.LoadData;
 
             SolidColorBrush line_sales = new SolidColorBrush(Color.FromArgb(255, 116, 195, 101));
             Style point_sales = new Style();
@@ -83,17 +84,19 @@ namespace EVE_SaleTools.Pages
             point_buysAvg.Setters.Add(new Setter(HeightProperty, 0));
             (LineChart.Series[3] as LineSeries).Background = line_buysAvg;
             (LineChart.Series[3] as LineSeries).DataPointStyle = point_buysAvg;
+        }
 
-
-
-            List<Transaction> mexallonSalesPerDay = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = 'Mexallon' AND BuyOrder = 0 GROUP BY strftime('%d-%m-%Y',Time) ORDER BY Time ASC");
+        private async void LoadData(object sender, EVE_SaleTools.Templates.ItemSelectedEventArgs args)
+        {
+            var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID + ".sqlite");
+            List<Transaction> mexallonSalesPerDay = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = '" + args.transaction.TypeName + "' AND BuyOrder = 0 GROUP BY strftime('%d-%m-%Y',Time) ORDER BY Time ASC");
 
             if (mexallonSalesPerDay.Count > 0)
             {
                 LineSeries sales = new LineSeries();
                 (LineChart.Series[0] as LineSeries).ItemsSource = mexallonSalesPerDay;
 
-                List<Transaction> mexallonSalesAveragePrice = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = 'Mexallon' AND BuyOrder = 0 GROUP BY TypeName");
+                List<Transaction> mexallonSalesAveragePrice = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = '" + args.transaction.TypeName + "' AND BuyOrder = 0 GROUP BY TypeName");
                 Transaction begin = new Transaction();
                 begin.Time = mexallonSalesPerDay.Last().Time;
                 begin.PricePerUnit = mexallonSalesAveragePrice.First().PricePerUnit;
@@ -101,31 +104,35 @@ namespace EVE_SaleTools.Pages
                 end.Time = mexallonSalesPerDay.First().Time;
                 end.PricePerUnit = mexallonSalesAveragePrice.First().PricePerUnit;
                 (LineChart.Series[1] as LineSeries).ItemsSource = new List<Transaction>() { begin, end };
+
             }
 
 
-            List<Transaction> mexallonBuysPerDay = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = 'Mexallon' AND BuyOrder = 1 GROUP BY strftime('%d-%m-%Y',Time) ORDER BY Time ASC");
+            List<Transaction> mexallonBuysPerDay = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = '" + args.transaction.TypeName + "' AND BuyOrder = 1 GROUP BY strftime('%d-%m-%Y',Time) ORDER BY Time ASC");
             if (mexallonBuysPerDay.Count > 0)
             {
-                (LineChart.Series[0] as LineSeries).ItemsSource = mexallonBuysPerDay;
+                (LineChart.Series[2] as LineSeries).ItemsSource = mexallonBuysPerDay;
 
 
-                List<Transaction> mexallonBuysAveragePrice = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = 'Mexallon' AND BuyOrder = 1 GROUP BY TypeName");
+                List<Transaction> mexallonBuysAveragePrice = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = '" + args.transaction.TypeName + "' AND BuyOrder = 1 GROUP BY TypeName");
                 Transaction begin = new Transaction();
                 begin.Time = mexallonBuysPerDay.Last().Time;
                 begin.PricePerUnit = mexallonBuysPerDay.First().PricePerUnit;
                 Transaction end = new Transaction();
-                end.Time = mexallonSalesPerDay.First().Time;
+                end.Time = mexallonBuysPerDay.First().Time;
                 end.PricePerUnit = mexallonBuysPerDay.First().PricePerUnit;
-                (LineChart.Series[1] as LineSeries).ItemsSource = new List<Transaction>() { begin, end };
+                (LineChart.Series[3] as LineSeries).ItemsSource = new List<Transaction>() { begin, end };
 
             }
 
 
+            TransactionInformation meta = await TransactionInformation.Load(args.transaction.TypeID);
+            this.ItemTitle.Text = args.transaction.TypeName;
+            this.ItemDescription.Text = System.Text.RegularExpressions.Regex.Replace(meta.Description, "<.*?>", String.Empty);
 
-            List<Transaction> mexallonAll = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' WHERE TypeName = 'Mexallon' ORDER BY Time");
+
+            List<Transaction> mexallonAll = await sqlite.QueryAsync<Transaction>("SELECT * FROM 'Transaction' WHERE TypeName = '" + args.transaction.TypeName + "' ORDER BY Time");
             this.ListViewTransactions.ItemsSource = mexallonAll;
-
         }
     }
 }

@@ -19,9 +19,16 @@ using EVE_SaleTools.Entities;
 
 namespace EVE_SaleTools.Templates
 {
+    public class ItemSelectedEventArgs : EventArgs
+    {
+        public Transaction transaction;
+    }
+
     public sealed partial class TransactionListCategoryList : UserControl
     {
         private Dictionary<String, TransactionListItemList> dataSet = new Dictionary<string,TransactionListItemList>();
+
+        public EventHandler<ItemSelectedEventArgs> ItemSelect;
 
         public TransactionListCategoryList()
         {
@@ -44,6 +51,7 @@ namespace EVE_SaleTools.Templates
                 {
                     TransactionListItemList newEntry = new TransactionListItemList();
                     newEntry.SetHeader(transaction.MarketGroupName);
+                    newEntry.ItemSelect += PassClickEvent;
 
                     this.dataSet.Add(transaction.MarketGroupName, newEntry);
                     this.MainList.Items.Add(newEntry);
@@ -52,9 +60,11 @@ namespace EVE_SaleTools.Templates
             }
         }
 
-        private void addCategory()
+        private void PassClickEvent(object sender, ItemSelectedEventArgs args)
         {
-            
+            EventHandler<ItemSelectedEventArgs> handler = this.ItemSelect;
+            if (handler != null)
+                handler(this, args);
         }
     }
 }

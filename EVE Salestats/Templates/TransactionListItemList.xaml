@@ -15,8 +15,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock x:Name="CategoryName" FontWeight="Bold" Margin="50,10,0,10" Grid.Row="0" Text="" FontSize="15"/>
-            <ListView x:Name="ItemList" Grid.Row="1" Visibility="Collapsed" IsItemClickEnabled="True" Background="#99333333" Margin="10,5" />
-
+            <ListView x:Name="ItemList" Grid.Row="1" Visibility="Collapsed" IsItemClickEnabled="True" Background="#99333333" Margin="10,5" ItemClick="ItemList_ItemClick"/>
 
         </Grid>
     </ListViewItem>
