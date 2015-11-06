@@ -51,5 +51,7 @@ namespace EVE_SaleTools.Templates
             entry.Content = ta.TypeName;
             this.ItemList.Items.Add(entry);
         }
+
+
     }
 }

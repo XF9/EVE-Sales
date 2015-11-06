@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid>
-        <ListView x:Name="MainList" ItemClick="MainList_ItemClick" IsItemClickEnabled="True">
+        <ListView x:Name="MainList" ItemClick="MainList_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
             
         </ListView>
     </Grid>
