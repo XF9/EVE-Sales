@@ -91,6 +91,11 @@ namespace EVE_SaleTools.Pages
             var sqlite = new SQLiteAsyncConnection(activeCharacter.CharID + ".sqlite");
             List<Transaction> mexallonSalesPerDay = await sqlite.QueryAsync<Transaction>("SELECT Time, AVG(PricePerUnit) AS PricePerUnit FROM 'Transaction' WHERE TypeName = '" + args.transaction.TypeName + "' AND BuyOrder = 0 GROUP BY strftime('%d-%m-%Y',Time) ORDER BY Time ASC");
 
+            (LineChart.Series[0] as LineSeries).ItemsSource = null;
+            (LineChart.Series[1] as LineSeries).ItemsSource = null;
+            (LineChart.Series[2] as LineSeries).ItemsSource = null;
+            (LineChart.Series[3] as LineSeries).ItemsSource = null;
+
             if (mexallonSalesPerDay.Count > 0)
             {
                 LineSeries sales = new LineSeries();
